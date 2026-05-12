@@ -147,13 +147,13 @@ Network network = new Network();
         List<List<String>> dataCSV = readCSV("/workspaces/AI/Beverages Nutrition (1).csv");
 
 
-    	for (int i = 0; i < dataCSV.size(); i++){
+    	for (int i = 1; i < dataCSV.size(); i++){
             data.add(new double[]{ (Double.parseDouble(dataCSV.get(i).get(7)))/94.45, (Double.parseDouble(dataCSV.get(i).get(8)))/58.2});
         }
 
 
     	ArrayList<Double> answers = new ArrayList<Double>();
-        for(int i = 0; i < dataCSV.size(); i++){
+        for(int i = 1; i < dataCSV.size(); i++){
             double caloires = Double.parseDouble(dataCSV.get(i).get(4));
     	    if (caloires < 200){
                 answers.add(0.0);
@@ -164,7 +164,7 @@ Network network = new Network();
     	}
 
 
-        for (int i = 0; i<data.size();i++){
+        for (int i = 1; i<data.size();i++){
             Double caloriesPerdict;
             if (network.predict(data.get(i)[0],data.get(i)[1]) > 0.5){
                 caloriesPerdict = 1.0;
@@ -178,8 +178,10 @@ Network network = new Network();
     	
     	network.train(data, answers);
 
-    	//Try making some predictions:
-    	//System.out.println("Should give no "+network.predict());
+        System.out.println(network.predict(0.99,0.99));
+        System.out.println(network.predict(0.5,0.5));
+
+    
 
 
     }
